@@ -29,7 +29,8 @@ const App = () => {
         <MotionConfig transition={{
             ...framerMotionConfig
         }}>
-            <Canvas className='r3F'> 
+            <Canvas className='r3F' onCreated={state => state.gl.setClearColor('#000000, 1')} > 
+            
             <PerspectiveCamera ref={cameraRef} makeDefault position={[0,0,5]} fov={75} />
             <ScrollControls 
              pages={4} damping={0.2} horizontal={false}>

@@ -10,7 +10,7 @@ body, #root {
     height: 100%;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
-    background: #000000;
+    background: rgb(0, 0, 0);
     color: #ffffff;
 }
 

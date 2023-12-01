@@ -9,19 +9,19 @@ export const Tablet = () => {
     return (
         <>
        
-            <PresentationControls
+            {/* <PresentationControls
                 polar={[-0.4, 0.2]}
                 azimuth={[-.25, 0.25]}
                 config={{mass:2, tension:400}}
                 snap
-                >
+                > */}
                 <Float rotationIntensity={.04}>
-                    <primitive object={tablet.scene} position={[0,-15,2]} rotation-z={.02}>
+                    <primitive object={tablet.scene} position={[0,-15,1.9]} rotation-z={.02}>
                        <Projects />
                     </primitive>
                     
                     </Float>
-         </PresentationControls>
+         {/* </PresentationControls> */}
 
       
         </>

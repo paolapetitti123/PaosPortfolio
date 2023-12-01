@@ -80,7 +80,7 @@ export default function Experience(props)
         <EffectComposer disableNormalPass multisampling={8}>
             <Bloom luminanceThreshold={1.1} mipmapBlur />
             <DepthOfField 
-            focusDistance={0.030}
+            focusDistance={0.03}
             focusLength={0.030}
              />
         </EffectComposer>
@@ -134,10 +134,10 @@ export default function Experience(props)
             <PlanetOne position={[4,0,0]} />
             <PlanetTwo position={[-2,-6,-2]} />
             <PlanetThree position={[6,-15,-2]} />
-        </group>
-        <Tablet />
+            </group>
+            
             <PlanetFour />
         </Suspense>
-        
+        <Tablet />
     </>
 }

@@ -1,18 +1,19 @@
-import { Image, Text } from "@react-three/drei";
+import { Image, Text, RoundedBox } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useMotionValue } from "framer-motion";
 import { motion } from "framer-motion-3d";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { atom } from "jotai";
-import { MeshBasicMaterial, BufferGeometry, BufferAttribute  } from 'three'
+import { MeshBasicMaterial, BufferGeometry, BufferAttribute, Mesh  } from 'three'
 import { useState } from "react";
+
 
 // 25 characters
 
 export const videoProjects = [
     {
-        projectName: "The Evolution of Nintendo",
+        projectName: "  The Evolution of Nintendo",
         url: "https://vimeo.com/635752043",
         image: "projects/theEvolutionOfNintendo.png",
         description: `A personal project where I created all vector files for the consoles in Adobe Illustrator and made this video in After Effects.`
@@ -56,8 +57,11 @@ export const threeDmodeling = [
 ];
 
 
+
+
 const Project = (props) => {
-    const {project, highlighted} = props;
+    const {project, highlighted, isCurrentProject} = props;
+    const [hovered, setHovered] = useState(false);
     
     const activeImage = useRef();
     const activeTitle = useRef();
@@ -79,14 +83,26 @@ const Project = (props) => {
         activeDesc.current.material.opacity = bgOpacity.get();
 
     })
+    useEffect(() => {
+        document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    }, [hovered]);
+
+    const handleOnClick = () => {
+        if(isCurrentProject) {
+            window.open(project.url, "_blank");
+        }
+    };
+    
 
     return (
         <>
     
         <group {...props}>
-            <Image  ref={activeImage} transparent opacity={0.5} scale={[1.7, 1,1]} url={project.image} position={[14.4,14.56,14.35]} onClick={() => window.open(project.url, "_blank")} />
-            <Text material={transparentMaterial} ref={activeTitle} transparent   maxWidth={[2.5]} anchorX={"left"} anchorY={"top"} fontSize={[0.14]} color="white" position={[13.48,15.27,14.35]} font={'fonts/johnnyfever.otf'} >{project.projectName} </Text>
-            <Text material={transparentMaterial} ref={activeDesc} transparent  maxWidth={[2.5]} anchorX={"left"} anchorY={"top"} fontSize={[0.07]} color="white"  position={[13.3,14.01,14.34]} lineHeight={1.3} font={'fonts/SpaceMono-Regular.ttf'} s >{project.description} </Text>
+            <Image  ref={activeImage} transparent toneMapped={false} opacity={0.5} scale={[1.7, 1,1]} url={project.image} position={[14.4,14.56,14.21]} onClick={handleOnClick} 
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)} />
+            <Text material={transparentMaterial} ref={activeTitle} transparent   maxWidth={[2.5]} anchorX={"left"} anchorY={"top"} fontSize={[0.14]} color="white" position={[13.48,15.24,14.21]} font={'fonts/johnnyfever.otf'} >{project.projectName} </Text>
+            <Text material={transparentMaterial} ref={activeDesc} transparent  maxWidth={[2.5]} anchorX={"left"} anchorY={"top"} fontSize={[0.07]} color="white"  position={[13.2,14.01,14.21]} lineHeight={1.3} font={'fonts/SpaceMono-Regular.ttf'} s >{project.description} </Text>
         
         </group>
             
@@ -100,11 +116,16 @@ export const Projects = () => {
     const { viewport } = useThree();
     const [currentProject, setCurrentProject] = useAtom(currentProjectAtom);
     const [currentCategory, setCurrentCategory] = useState("video");
+    const [hovered, setHovered] = useState(false);
 
     const handleCategoryChange = (category) => {
         setCurrentCategory(category);
         setCurrentProject(Math.floor(videoProjects.length / 2));
     };
+
+    useEffect(() => {
+        document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    }, [hovered])
 
     return (
         <group position={-viewport.height * 2 + 1}>
@@ -113,68 +134,94 @@ export const Projects = () => {
                 position={[13.25, 13.5, 14.444]} 
                 scale={[0.17,0.07,0.2]}
                 onClick={() => handleCategoryChange("video")}
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)}
             >
-                <planeGeometry args={[3.7, 2.1, 32,32]}  />
-                <Text transparent   maxWidth={[2.5]} anchorX={"center"} anchorY={"bottom"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'} position={[0,-0.6,0.1]} >Video</Text>
-                <meshBasicMaterial color={currentCategory === "video" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                <RoundedBox args={[3.7, 1.8, 0]} radius={0.1}>
+                    <Text transparent maxWidth={[2.5]} anchorX={"center"} anchorY={"top"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'}  position={[0,.6,0.01]} >Video</Text>
+                    <meshBasicMaterial color={currentCategory === "video" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                </RoundedBox>
+               
+                
             </mesh>
 
             <mesh
                 position={[14.35, 13.6, 14.444]} 
                 scale={[0.17,0.07,0.2]}
                 onClick={() => handleCategoryChange("game")}
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)}
             >
-                <planeGeometry args={[3.7, 2.1]} />
-                <Text transparent   maxWidth={[2.5]} anchorX={"center"} anchorY={"bottom"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'} position={[0,-0.6,0.1]} >Games</Text>
-                <meshBasicMaterial color={currentCategory === "game" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                <RoundedBox args={[3.7, 1.8, 0]} radius={0.1}>
+                    <Text transparent   maxWidth={[2.5]} anchorX={"center"} anchorY={"top"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'} position={[0,0.6,0.01]} >Games</Text>
+                    <meshBasicMaterial color={currentCategory === "game" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                </RoundedBox>
+                
+                
             </mesh>
 
             <mesh
                 position={[15.45, 13.5, 14.444]} 
                 scale={[0.17,0.07,0.2]}
                 onClick={() => handleCategoryChange("threeDmodeling")}
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)}
             >
-                <planeGeometry args={[3.7, 2.1]} />
-                <Text transparent   maxWidth={[2.5]} anchorX={"center"} anchorY={"bottom"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'} position={[0,-0.6,0.1]} >3D</Text>
-                <meshBasicMaterial color={currentCategory === "threeDmodeling" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                <RoundedBox args={[3.7,1.8,0]} radius={0.1}>
+                    <Text transparent   maxWidth={[2.5]} anchorX={"center"} anchorY={"bottom"} fontSize={[1]} color="white" font={'fonts/johnnyfever.otf'} position={[0,-0.6,0.01]} >3D</Text>
+                    <meshBasicMaterial color={currentCategory === "threeDmodeling" ? "rgb(255,0,0)" : "rgb(139,110,255)"} transparent opacity={0.3} />
+                </RoundedBox>
+         
+                
             </mesh>
 
             {/* Project cards */}
             {currentCategory === "video" &&
                 videoProjects.map((project, index) => (
-                    <motion.group key={"project_" + index} position={[index * 1.4, 0, 0.3]}
+                    <motion.group key={"project_" + index} position={[index * 0.5, 0, 0.3]}
                         animate={{
-                            x: (index - currentProject) * 1.4,
-                            z: currentProject === index ? 0.2 : 0,
+                            x: (index - currentProject) * 0.5,
+                            z: currentProject === index ? 0.231 : 0.229
                         }}>
-                        <Project project={project} highlighted={index === currentProject} opacity={0.5} />
+                        <Project project={project} highlighted={index === currentProject} isCurrentProject={index === currentProject} opacity={0.5} />
                     </motion.group>
                 ))
             }
 
             {currentCategory === "game" &&
                 gameProjects.map((project, index) => (
-                    <motion.group key={"project_" + index} position={[index * 1.4, 0, 0.3]}
+                    <motion.group key={"project_" + index} position={[index * 0.5, 0, 0.3]}
                         animate={{
-                            x: (index - currentProject) * 1.4,
-                            z: currentProject === index ? 0.2 : 0,
+                            x: (index - currentProject) * 0.5,
+                            z: currentProject === index ? 0.231 : 0.229,
                         }}>
-                        <Project project={project} highlighted={index === currentProject} opacity={0.5} />
+                        <Project project={project} highlighted={index === currentProject} isCurrentProject={index === currentProject} opacity={0.5} />
                     </motion.group>
                 ))
             }
 
             {currentCategory === "threeDmodeling" &&
                 threeDmodeling.map((project, index) => (
-                    <motion.group key={"project_" + index} position={[index * 1.4, 0, 0.3]}
+                    <motion.group key={"project_" + index} position={[index * 0.5, 0, 0.3]}
                         animate={{
-                            x: (index - currentProject) * 1.4,
-                            z: currentProject === index ? 0.2 : 0,
+                            x: (index - currentProject) * 0.5,
+                            z: currentProject === index ? 0.231 : 0.229,
                         }}>
-                        <Project project={project} highlighted={index === currentProject} opacity={0.5} />
+                        <Project project={project} highlighted={index === currentProject} isCurrentProject={index === currentProject} opacity={0.5} />
                     </motion.group>
                 ))
             }
+
+            <mesh
+                position={[14.35, 14.35, 14.48]} 
+                scale={[1,1.18,0.2]}
+                
+            >
+                <RoundedBox args={[3.7, 1.8, 0.5]} radius={0.1}>
+                <meshStandardMaterial color='pink'  transparent opacity={0.05} />
+                </RoundedBox>
+
+            </mesh>
         </group>
     );
 }
