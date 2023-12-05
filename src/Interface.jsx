@@ -48,7 +48,7 @@ const WhoAmISection = (props) => {
     return (
     <Section>
         <h1 className="text-6xl justify-center items-center font-extrabold leading-snug ">
-            Hello! I am <br /> <span className="bg-white px-1 italic text-black pr-4 pl-2"> Paola </span>
+            Hello! I am <br /> <span className="bg-white px-1 italic text-black pr-4 pl-2"> Paola Petitti </span>
         </h1>
         <motion.p className="text-lg text-gray-500 mt-4"
                 initial={{

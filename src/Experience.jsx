@@ -12,6 +12,7 @@ import { PlanetOne } from "./PlanetOne";
 import { PlanetTwo } from "./PlanetTwo";
 import { PlanetThree } from "./PlanetThree";
 import { Tablet } from './Tablet'
+import { Ufo } from "./Ufo";
 
 
 export default function Experience(props)
@@ -162,6 +163,9 @@ export default function Experience(props)
             
             <PlanetFour />
              <Tablet />
+             <Ufo />
+      
+             
         </Suspense>
        
     </>
