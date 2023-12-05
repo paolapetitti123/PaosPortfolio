@@ -1,6 +1,4 @@
-import { Html, useGLTF, Float, PresentationControls } from "@react-three/drei";
-import { Leva } from "leva";
-import { FloatType } from "three";
+import { useGLTF, Float } from "@react-three/drei";
 import { Projects } from "./Projects";
 
 export const Tablet = () => {
@@ -8,20 +6,13 @@ export const Tablet = () => {
 
     return (
         <>
-       
-            {/* <PresentationControls
-                polar={[-0.4, 0.2]}
-                azimuth={[-.25, 0.25]}
-                config={{mass:2, tension:400}}
-                snap
-                > */}
+    
                 <Float rotationIntensity={.04}>
                     <primitive object={tablet.scene} position={[0,-15,1.9]} rotation-z={.02}>
                        <Projects />
                     </primitive>
                     
                     </Float>
-         {/* </PresentationControls> */}
 
       
         </>
@@ -29,4 +20,4 @@ export const Tablet = () => {
     
 }
 
-useGLTF.preload('../public/tablet.gltf')
+useGLTF.preload('./tablet.gltf')

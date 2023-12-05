@@ -1,13 +1,14 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import { Scroll, ScrollControls, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Interface } from './Interface.jsx'
 import React, { useEffect, useState, useRef } from 'react'
 import { ScrollManager } from './ScrollManager.jsx'
 import { MenuNav } from './MenuNav.jsx'
-import { MotionConfig, animate, useMotionValue  } from 'framer-motion'
+import { MotionConfig } from 'framer-motion'
 import { framerMotionConfig } from './motionConfig.js'
-import * as THREE from 'three'
+
+import MusicButton from './MusicButton.jsx'
 
 const App = () => {
     const [section, setSection] = useState(0);
@@ -45,11 +46,13 @@ const App = () => {
                 </ScrollControls>
             
             </Canvas>
+             <MusicButton />
             <MenuNav 
             onSectionChange={setSection} 
             menuOpened={menuOpened} 
             setMenuOpened={setMenuOpened}
         />
+           
         </MotionConfig>
         {/* <Leva hidden /> */}
         </>

@@ -1,4 +1,4 @@
-import { useAnimations, useGLTF } from "@react-three/drei";
+import { PresentationControls, useAnimations, useGLTF, Float } from "@react-three/drei";
 import { useEffect } from "react";
 import { useControls } from "leva";
 import { motion } from "framer-motion-3d";
@@ -21,9 +21,14 @@ export default function Astronaut(props)
     }, [animationIndex])
 
     return <>
-    <motion.group scale={[0,0,0]} animate={{ scale: section === 0 ? 1 : 1}}>
-        <primitive  {...props} object={model.scene}  rotation-y={[-.1]}/>
-    </motion.group>
+
+    <Float rotationIntensity={ section === 3 ? 0 : 1}>
+        <motion.group scale={[0,0,0]} animate={{ scale: section === 0 ? 1 : 1}}>
+        
+            <primitive  {...props} object={model.scene}  rotation-y={[-.1]}/>
+            
+        </motion.group>
+        </Float>
             
     </>
      

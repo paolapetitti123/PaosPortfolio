@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { Html } from "@react-three/drei";
 import { useAtom } from "jotai";
 import { currentProjectAtom, videoProjects } from "./Projects";
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+
 
 const Section = (props) => {
     const {children} = props;
@@ -250,6 +253,35 @@ const ProjectsSection = () => {
 }
 
 const ReachOut = () => {
+    const form = useRef();
+    const [records, setRecords] = useState([]);
+    const [formValues, setFormValues] = useState({
+        name: "",
+        email: "",
+        message: ""
+    });
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        setRecords([...records, formValues]);
+        setFormValues({
+            name: "",
+            email: "",
+            message: ""
+        });
+
+        emailjs.sendForm('service_5uw2z5s', 'template_9ibshuc', form.current, 'BipoNJto-41twoc1Z')
+          .then((result) => {
+              console.log(result.text);
+              alert("Message sent!");
+           
+
+          }, (error) => {
+              console.log(error.text);
+          });
+      };
+
     return (
         <Section id="reachOutSection">
             <h2 className="text-5xl font-bold">Reach out</h2>
@@ -266,17 +298,30 @@ const ReachOut = () => {
                 duration: 1,
                 delay: 1.25
             }}>
-                <form>
+                <form ref={form} onSubmit={sendEmail}>
                     <label htmlFor="name" className="font-large text-gray-900 block mb-1 ">Name</label>
-                    <input type="text" name="name" id="name" className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-4 mt-2 " />
+                    <input value={formValues.name}
+                           onChange={(e) => setFormValues({...formValues, name: e.target.value})} 
+                           type="text" 
+                           name="user_name" 
+                           id="name" 
+                           className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-4 mt-2 " />
 
                     <label htmlFor="email" className="font-medium text-gray-900 block mb-1">Email</label>
-                    <input type="email" name="email" id="email" className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-4" />
+                    <input value={formValues.email} 
+                           onChange={(e) => setFormValues({...formValues, email: e.target.value})} 
+                           type="email" 
+                           name="user_email" 
+                           id="email" 
+                           className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-4" />
                     
                     <label htmlFor="email" className="font-medium text-gray-900 block mb-1 ">Message</label>
-                    <textarea name="message" id="message" className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-8 " />
-
-                    <button className={`hover:bg-purple-800 bg-purple-400 text-white py-4 px-8 rounded-lg font-bold text-lg mt-8 justify-center `}> Submit </button>
+                    <textarea value={formValues.message}
+                              onChange={(e) => setFormValues({...formValues, message: e.target.value})}  
+                              name="message" 
+                              id="message" 
+                              className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 mb-8 " />
+                    <input type="submit" value="Send" className={`hover:bg-purple-800 bg-purple-400 text-white py-4 px-8 rounded-lg font-bold text-lg mt-8 justify-center `} />
                 </form>
             </motion.div>
         </Section>

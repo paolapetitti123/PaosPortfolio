@@ -5,7 +5,7 @@ import { motion } from "framer-motion-3d";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { atom } from "jotai";
-import { MeshBasicMaterial, BufferGeometry, BufferAttribute, Mesh  } from 'three'
+import { MeshBasicMaterial } from 'three'
 import { useState } from "react";
 
 
@@ -13,17 +13,18 @@ import { useState } from "react";
 
 export const videoProjects = [
     {
-        projectName: "  The Evolution of Nintendo",
-        url: "https://vimeo.com/635752043",
-        image: "projects/theEvolutionOfNintendo.png",
-        description: `A personal project where I created all vector files for the consoles in Adobe Illustrator and made this video in After Effects.`
-    },
-    {
         projectName: `              Punk Tactics       `,
         url: "https://vimeo.com/890115028",
         image: "projects/punkTactics.png",
         description: `With this video, I experimented with sketchbook stop motion style editing, a style that I had wanted to learn for so long.`
+    },
+    {
+        projectName: "  The Evolution of Nintendo",
+        url: "https://vimeo.com/635752043",
+        image: "projects/theEvolutionOfNintendo.png",
+        description: `A personal project where I created all vector files for the consoles in Adobe Illustrator and made this video in After Effects.`
     }
+    
 ]
 
 export const gameProjects = [

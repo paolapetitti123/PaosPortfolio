@@ -1,4 +1,4 @@
-import { Suspense, useEffect,  memo, useRef, forwardRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Astronaut from "./Astronaut";
 import Galaxy from "./Galaxy"
 import { Bloom, DepthOfField, EffectComposer } from "@react-three/postprocessing";
@@ -6,11 +6,8 @@ import { motion } from "framer-motion-3d";
 import { useFrame, useThree } from "@react-three/fiber";
 import { animate, useMotionValue } from "framer-motion";
 import { framerMotionConfig } from "./motionConfig";
-import { useScroll, Float, Bounds, useBounds, useGLTF, CameraControls } from "@react-three/drei";
+import { useScroll, PresentationControls } from "@react-three/drei";
 import { PlanetFour  } from "./PlanetFour";
-import { useControls, button } from 'leva';
-import { Perf } from 'r3f-perf';
-import * as THREE from 'three'
 import { PlanetOne } from "./PlanetOne";
 import { PlanetTwo } from "./PlanetTwo";
 import { PlanetThree } from "./PlanetThree";
@@ -19,7 +16,7 @@ import { Tablet } from './Tablet'
 
 export default function Experience(props)
 {
-    const { menuOpened, onPlanetClick} = props;
+    const { menuOpened} = props;
     const {viewport} = useThree();
     
     const data = useScroll();
@@ -86,6 +83,7 @@ export default function Experience(props)
         </EffectComposer>
 
         <Suspense>
+     
             <motion.group
                     position={[0,-2,1]}
                     rotation={[0.01,-0.5,0]}
@@ -98,7 +96,7 @@ export default function Experience(props)
                         scaleX: 0.9,
                         scaleY: 0.9,
                         scaleZ: 0.9,
-                        x: 1,
+                        x: 0.2,
                         y: -1.5,
                         rotateY: -0.2 
                         },
@@ -120,24 +118,51 @@ export default function Experience(props)
                         },
                         3: {
                             x: 1,
-                            y: -viewport.height *3 - 2,
+                            y: -viewport.height *3 - 1.9,
                             z: 1,
-                            rotateX: 0,
+                            rotateX: 0.2,
                             rotateY: -0.2,
-                            rotateZ: 0
+                            rotateZ: 0,
                         }
                     }}
             >
+                
                     <Astronaut animationIndex={characterAnimation} section={section} />
+                    
             </motion.group>
+            
             <group>
+            <PresentationControls
+                polar={[-0.4, 0.2]}
+                azimuth={[-.25, 0.25]}
+                config={{mass:2, tension:400}}
+                snap
+                >
             <PlanetOne position={[4,0,0]} />
+            </PresentationControls>
+
+            <PresentationControls
+                polar={[-0.4, 0.2]}
+                azimuth={[-.25, 0.25]}
+                config={{mass:2, tension:400}}
+                snap
+                >
             <PlanetTwo position={[-2,-6,-2]} />
+            </PresentationControls>
+
+            <PresentationControls
+                polar={[-0.4, 0.1]}
+                azimuth={[-.1, 0.1]}
+                config={{mass:2, tension:400}}
+                snap
+                >
             <PlanetThree position={[6,-15,-2]} />
+            </PresentationControls>
             </group>
             
             <PlanetFour />
+             <Tablet />
         </Suspense>
-        <Tablet />
+       
     </>
 }
