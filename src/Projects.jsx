@@ -89,7 +89,7 @@ export const threeDmodeling = [
     },
     {
         projectName: `              Face Model`,
-        url: "/projects/firstCharacterFace.png",
+        url: "https://imgur.com/a/UZoJKoX",
         image: "projects/firstCharacterFace.png",
         description: `My very first attempt at creating a human head in Blender, primarily using the sculpting feature and minor color-grading done in Photoshop.`
     }
