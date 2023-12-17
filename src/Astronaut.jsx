@@ -6,7 +6,7 @@ import { motion } from "framer-motion-3d";
 export default function Astronaut(props)
 {
     const {animationIndex, section } = props;
-    const model = useGLTF('./astronaut.gltf')
+    const model = useGLTF('./astronaut-pink.gltf')
     const animations = useAnimations(model.animations, model.scene);
     
 
@@ -34,4 +34,4 @@ export default function Astronaut(props)
      
 }
 
-useGLTF.preload('./astronaut.gltf')
+useGLTF.preload('./astronaut-pink.gltf')

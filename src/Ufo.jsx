@@ -9,7 +9,7 @@ export const Ufo = ({position}) => {
     const downwardSpiral = { enabled: true, maxY: -15, minY: 2 }; // Adjust maxY and minY as needed
 
     useFrame((state, delta) => {
-        ufoRotation.current.rotation.y += delta * 2
+        ufoRotation.current.rotation.y += delta * 1.5
         ufoRotation.current.rotation.z += delta * 0.0009
 
         const radius = 7; // Adjust the radius as needed
@@ -24,7 +24,6 @@ export const Ufo = ({position}) => {
           } else if (!downwardSpiral.enabled && ufoRotation.current.position.y >= downwardSpiral.minY) {
             downwardSpiral.enabled = true;
           }
-          console.log(ufoRotation.current.position.y);
 
         // Update the y-coordinate based on the spiral direction
         const yDirection = downwardSpiral.enabled ? -1 : 1;

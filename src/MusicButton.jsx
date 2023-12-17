@@ -22,7 +22,7 @@ const MusicButton = () => {
                 {isPlaying ? '||' : '▶'}
             </button>
 
-            <audio ref={audioRef} src="/projects/SpaceshipInterior.mp3" />
+            <audio ref={audioRef} src="./projects/SpaceshipInterior.mp3" />
          </>
     )
 }

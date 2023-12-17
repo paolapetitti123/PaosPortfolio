@@ -133,32 +133,15 @@ export default function Experience(props)
             </motion.group>
             
             <group>
-            <PresentationControls
-                polar={[-0.4, 0.2]}
-                azimuth={[-.25, 0.25]}
-                config={{mass:2, tension:400}}
-                snap
-                >
+            
             <PlanetOne position={[4,0,0]} />
-            </PresentationControls>
+            
 
-            <PresentationControls
-                polar={[-0.4, 0.2]}
-                azimuth={[-.25, 0.25]}
-                config={{mass:2, tension:400}}
-                snap
-                >
+           
             <PlanetTwo position={[-2,-6,-2]} />
-            </PresentationControls>
 
-            <PresentationControls
-                polar={[-0.4, 0.1]}
-                azimuth={[-.1, 0.1]}
-                config={{mass:2, tension:400}}
-                snap
-                >
+            
             <PlanetThree position={[6,-15,-2]} />
-            </PresentationControls>
             </group>
             
             <PlanetFour />
