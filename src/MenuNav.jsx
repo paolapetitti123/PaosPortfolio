@@ -40,7 +40,7 @@ export const MenuNav = (props) => {
                     <img src={DownloadIcon} alt="Download Icon" className="ml-3 w-6 h-5" />
                         <button className="text-2xl font-bold cursor-pointer  hover:text-pink-600 transition-colors pl-4">Resume</button>
                     </a>
-                    <a href='https://paolapetitti123.github.io/PaosPortfolio/' className="flex items-center">
+                    <a href='https://github.com/paolapetitti123' className="flex items-center">
                         <img src={LinkIcon} alt="Link Icon" className="ml-3 w-6 h-5" />
                         <button className="text-2xl font-bold cursor-pointer  hover:text-pink-600 transition-colors pl-4">Github Repo</button>
                     </a>
